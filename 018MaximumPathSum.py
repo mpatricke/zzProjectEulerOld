@@ -28,9 +28,9 @@ rowData = []
 rowSums = []
 rowCount = maxSumNext = idxMaxNext = 0
 
-# with open('018LargeSumTestDat') as dataFile:
-# with open('018LargeSumDat') as dataFile:
-with open('067LargeSumDat') as dataFile:
+#with open('018LargeSumTestDat') as dataFile:
+with open('018LargeSumDat') as dataFile:
+#with open('067LargeSumDat') as dataFile:
     for line in dataFile:
         rowCount += 1
         rowSums.append([int(i) for i in line.rstrip('\n').split(" ")])
@@ -40,7 +40,7 @@ result = recSumAtRow(rowSums, len(rowSums) - 2)         # start at second to las
 
 print
 print "Current Line:         | Next Line:"
-print "No.   Pos   Sum  Data | No.   Pos   Sum  Data"
+print "No.   Idx   Sum  Data | No.   Idx   Sum  Data"
 print "====  ===   ===  ==== | ====  ===   ===  ===="
 
 for i in range(0,rowCount):                             # now trace back *from the top* through the data for the path
@@ -68,4 +68,5 @@ for i in range(0,rowCount):                             # now trace back *from t
         print ('{:>4} {:>4} {:>5} {:>5}'.format(i, idxMax, maxSumNext, rowData[i][idxMax])), "|   --- end of data ---"
 
 print
+#print rowData
 print "Maximum path sum =", result, "; found in:", datetime.now() - starttime, "secs."
