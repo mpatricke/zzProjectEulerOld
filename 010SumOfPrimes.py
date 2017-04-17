@@ -10,12 +10,7 @@ starttime = datetime.now()
 
 maxPrime = 2000000
 sumPrimes = 0
-numbers = range(1, maxPrime + 1)
-
-for i in range(0, maxPrime):
-    numbers[i] = 1
-
-starttimes = datetime.now()
+numbers = [1] * maxPrime
 
 # "Sieve of Eratosthenes" (https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes#Pseudocode):
 for i in range(2,int(sqrt(maxPrime + 1)) + 1):
@@ -30,7 +25,7 @@ for i in range(2,int(sqrt(maxPrime + 1)) + 1):
             else:
                 numbers[k] = 0
 
-print "Sieve Execution time:", datetime.now() - starttimes
+print "Sieve Execution time:", datetime.now() - starttime
 
 for i in range(2, maxPrime):
     if numbers[i] == 1:
