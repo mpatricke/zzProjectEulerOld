@@ -14,7 +14,7 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 adjNoCount = 4
 rowData = []
 numSeq = [0]*adjNoCount
-rowCount = rowLen = maxProd = iMax = jMax = prodNxt = 0 
+rowCount = rowLen = maxProd = iMax = jMax = prodNxt = iterCount = 0
 
 #with open('011LargeGridTest.txt') as dataFile:
 with open('011LargeGrid.txt') as dataFile:
@@ -27,16 +27,18 @@ rowLen = len(rowData[rowCount-1])
 for i in range(0,rowLen):
     for j in range (0,rowCount-(adjNoCount-1)):
         prodNxt = rowData[i][j] * rowData[i][j+1]*rowData[i][j+2]*rowData[i][j+3]
+        iterCount += 1
         if prodNxt > maxProd:
-			maxProdDir = "right"
+            maxProdDir = "right"
             maxProd = prodNxt
             iMax = i
             jMax = j
-			numSeq = [rowData[i][j],rowData[i][j+1],rowData[i][j+2],rowData[i][j+3]]
+            numSeq = [rowData[i][j],rowData[i][j+1],rowData[i][j+2],rowData[i][j+3]]
 
-	if i < rowLen-(adjNoCount-1):
+    if i < rowLen-(adjNoCount-1):
 		for j in range (0,rowCount):
 			prodNxt  = rowData[i][j] * rowData[i+1][j]*rowData[i+2][j]*rowData[i+3][j]
+			iterCount += 1
 			if prodNxt > maxProd:
 				maxProdDir = "down"
 				maxProd = prodNxt
@@ -46,6 +48,7 @@ for i in range(0,rowLen):
 
 			if j < rowCount - adjNoCount:
 				prodNxt  = rowData[i][j] * rowData[i+1][j+1]*rowData[i+2][j+2]*rowData[i+3][j+3]
+				iterCount += 1
 				if prodNxt > maxProd:
 					maxProdDir = "diagonally leading"
 					maxProd = prodNxt
@@ -55,6 +58,7 @@ for i in range(0,rowLen):
 
 			if j > adjNoCount -1:
 				prodNxt  = rowData[i][j] * rowData[i+1][j-1]*rowData[i+2][j-2]*rowData[i+3][j-3]
+				iterCount += 1
 				if prodNxt > maxProd:
 					maxProdDir = "diagonally trailing"
 					maxProd = prodNxt
@@ -64,7 +68,7 @@ for i in range(0,rowLen):
 
 print
 print "The maximum product of any",adjNoCount,"adjacent numbers in the",rowLen,"x",rowCount," array is",maxProd
-print
 print "Starting",maxProdDir,"from cell", iMax+1,",", jMax+1,": the product of", numSeq
 print
-print "Execution time:", datetime.now() - starttime
+print "Program:       ", os.path.abspath(__file__)
+print "Execution time:", datetime.now() - starttime,"secs.; found in", iterCount,"cycles."
